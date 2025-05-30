@@ -14,7 +14,7 @@ final class Version20250530195944 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Create proverb & proverb_content tables';
     }
 
     public function up(Schema $schema): void
