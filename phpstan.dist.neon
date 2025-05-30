@@ -1,0 +1,15 @@
+parameters:
+    level: 6
+    inferPrivatePropertyTypeFromConstructor: true
+    reportUnmatchedIgnoredErrors: false
+    treatPhpDocTypesAsCertain: false
+    paths:
+        - src/
+    ignoreErrors:
+        - '#^Unsafe usage of new static\(\)#'
+        - "#^Casting to (.*?) something that's already (.*?)#"
+        - '#expects string, Magento\\Framework\\Phrase given\.$#'
+        - '#PHPDoc tag @throws with type [a-zA-Z0-9\\_]+ is not subtype of Throwable#'
+        - '#Method Magento\\Framework\\Setup\\SetupInterface::getConnection\(\) invoked with 1 parameter, 0 required#'
+        - '#Call to an undefined method SoapClient::.*?\(\)#'
+        - '#Call to an undefined (static )?method [a-zA-Z0-9\\_]+::(create)[A-Za-z0-9]+#'

@@ -1,0 +1,40 @@
+grumphp:
+  hooks_dir: ./config/grumphp/hooks   # Route to personalized hooks
+  hide_circumvention_tip: true       # Hide suggestion/advice when checks don't pass
+  tasks:
+    git_blacklist:                   # Git blacklist keywords
+      keywords:
+        - 'die('
+        - 'dump('
+        - 'var_dump('
+        - 'exit;'
+      whitelist_patterns: []
+      triggered_by: ['php']
+      regexp_type: G
+      match_word: false
+      ignore_patterns: []
+# PENDING TO INSTALL VALID CA-CERTIFICATE
+#    composer:
+#      file: ./composer.json
+#      no_check_all: true
+#      no_check_lock: false
+#      no_check_publish: false
+#      with_dependencies: false
+#      strict: false
+    phpcs:
+      standard: "./config/phpcs/Proverbs/ruleset.xml"
+      tab_width: 4
+      ignore_patterns: ["test,config/,/app/etc/,fotorama.js,jquery-ui.js"]
+      triggered_by: [php,phtml,js]
+    phpcsfixer2:
+      config: .php-cs-fixer.dist.php
+      diff: true
+      verbose: true
+      triggered_by: ['php']
+    phpmd:
+      ruleset:
+        - "./config/phpmd/ruleset.xml"
+      whitelist_patterns:
+        - /^src\/(.*)/
+    phpstan:
+      level: 6
