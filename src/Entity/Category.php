@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -27,6 +31,17 @@ class Category
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    /**
+     * @var Collection<int, ProverbCategory>
+     */
+    #[ORM\OneToMany(targetEntity: ProverbCategory::class, mappedBy: 'category', orphanRemoval: true)]
+    private Collection $proverbCategories;
+
+    public function __construct()
+    {
+        $this->proverbCategories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +104,36 @@ class Category
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProverbCategory>
+     */
+    public function getProverbCategories(): Collection
+    {
+        return $this->proverbCategories;
+    }
+
+    public function addProverbCategory(ProverbCategory $proverbCategory): static
+    {
+        if (!$this->proverbCategories->contains($proverbCategory)) {
+            $this->proverbCategories->add($proverbCategory);
+            $proverbCategory->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProverbCategory(ProverbCategory $proverbCategory): static
+    {
+        if ($this->proverbCategories->removeElement($proverbCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($proverbCategory->getCategory() === $this) {
+                $proverbCategory->setCategory(null);
+            }
+        }
 
         return $this;
     }
