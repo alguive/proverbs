@@ -5,6 +5,7 @@ Init project (first time)
 ```
 docker compose up -d --build
 docker-compose exec php composer install
+./vendor/bin/grumphp git:init
 ```
 
 **Poison hosts file**
