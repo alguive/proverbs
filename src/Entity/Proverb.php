@@ -35,6 +35,9 @@ class Proverb
     #[ORM\OneToMany(targetEntity: ProverbCategory::class, mappedBy: 'proverb', orphanRemoval: true)]
     private Collection $proverbCategories;
 
+    #[ORM\Column(enumType: ProverbStatusEnum::class)]
+    private ProverbStatusEnum $status = ProverbStatusEnum::DISABLED;
+
     public function __construct()
     {
         $this->proverbCategories = new ArrayCollection();
@@ -124,6 +127,18 @@ class Proverb
                 $proverbCategory->setProverb(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?ProverbStatusEnum
+    {
+        return $this->status;
+    }
+
+    public function setStatus(ProverbStatusEnum $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
