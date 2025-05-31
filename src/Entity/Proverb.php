@@ -35,7 +35,10 @@ class Proverb
     #[ORM\OneToMany(targetEntity: ProverbCategory::class, mappedBy: 'proverb', orphanRemoval: true)]
     private Collection $proverbCategories;
 
-    #[ORM\Column(enumType: ProverbStatusEnum::class)]
+    #[ORM\Column(
+        enumType: ProverbStatusEnum::class,
+        options: ['default' => ProverbStatusEnum::DISABLED->value]
+    )]
     private ProverbStatusEnum $status = ProverbStatusEnum::DISABLED;
 
     public function __construct()
