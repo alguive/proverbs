@@ -2,6 +2,7 @@
 
 Init project (first time)
 
+
 ```
 docker compose up -d --build
 docker-compose exec php composer install
