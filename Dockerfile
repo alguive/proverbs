@@ -38,6 +38,8 @@ RUN chmod +x /etc/entrypoint.sh
 
 ENTRYPOINT ["/etc/entrypoint.sh"]
 
-EXPOSE 9000
+# Elimina EXPOSE 9000
+# Usa el puerto de la variable de entorno PORT
+EXPOSE 8080
 
-CMD ["php-fpm"]
+CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-8080} -t public"]
