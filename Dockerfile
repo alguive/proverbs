@@ -29,6 +29,8 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html
 
+RUN composer install --no-dev --optimize-autoloader
+
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/var /var/www/html/public
 
