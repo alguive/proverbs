@@ -40,7 +40,7 @@ RUN php bin/console cache:clear --env=prod
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/var /var/www/html/public
 
-COPY /docker/entrypoint.sh /etc/entrypoint.sh
+COPY ./entrypoint.sh /etc/entrypoint.sh
 
 RUN chmod +x /etc/entrypoint.sh
 
