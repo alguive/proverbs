@@ -29,7 +29,13 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html
 
+# Establecer entorno de producción
+ENV APP_ENV=prod
+ENV APP_DEBUG=0
+
 RUN composer install --no-dev --optimize-autoloader
+
+RUN php bin/console cache:clear --env=prod
 
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/var /var/www/html/public
